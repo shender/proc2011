@@ -1,0 +1,577 @@
+\documentclass[11pt]{article}
+% math symbols
+\usepackage{amssymb,amsmath}
+% for different compilers
+\usepackage{ifpdf}
+% geometry of page
+\usepackage[margin=2.1cm]{geometry}
+% float pictures
+\usepackage{wrapfig}
+
+% if pdflatex, then
+\ifpdf
+ \usepackage[english,russian]{babel}
+ \usepackage[utf8]{inputenc}
+ \usepackage[unicode]{hyperref}
+ \usepackage[pdftex]{graphicx}
+ \usepackage{cmlgc}
+% if xelatex, then
+\else
+% math fonts
+ \usepackage{fouriernc}
+% xelatex specific packages
+ \usepackage[xetex]{hyperref}
+ \usepackage{xunicode}	% some extra unicode support
+ \usepackage{xltxtra}	% \XeLaTeX macro
+ \defaultfontfeatures{Mapping=tex-text}
+ \usepackage{polyglossia}	% instead of babel in xelatex
+ \setdefaultlanguage{russian}
+% fonts
+ \setromanfont{Charis SIL}
+ \setsansfont{OfficinaSansC} 
+ \setmonofont{Consolas}
+\fi
+
+% several pictures in one figure
+\usepackage{subfig}
+% calc in TeX expressions
+\usepackage{calc}
+% nice pictures and plots
+\usepackage{pgfplots,tikz,circuitikz}
+% different libraries for pictures
+\usetikzlibrary{%
+  arrows,%
+  calc,%
+  patterns,%
+  decorations.pathreplacing,%
+  decorations.pathmorphing,%
+  decorations.markings%
+}
+
+% colors of the hyperlinks
+\hypersetup{colorlinks,%
+  citecolor=blue,%
+  urlcolor=blue,%
+  linkcolor=red
+}
+
+\tolerance=1000
+\emergencystretch=0.74cm
+
+\newcommand{\nn}{\nonumber}
+\newcommand{\pt}{\partial}
+\newcommand{\eps}{\epsilon}
+\newcommand{\vareps}{\varepsilon}
+\newcommand{\const}{\mathrm{const}}
+\newcommand{\com}[1]{{\Large{\texttt{{\color{red}(#1)}}}}}
+
+% счётчик задач
+\newcounter{notask}
+\setcounter{notask}{1}
+
+% условие без картинки
+\newcommand{\task}[1]{
+	\hrule
+	\hbox to \textwidth {%
+    	\vrule
+	    \parbox[t]{0.04\textwidth}{\smallskip \centering \arabic{notask}}%
+    	\vrule%
+	    \hfill%
+    	\parbox[t]{0.93\textwidth}{\smallskip #1 \smallskip}\hfill%
+	    \vrule
+	}
+	\hrule
+    \addtocounter{notask}{1}
+    \pagebreak[2]
+}
+
+\newlength{\h}
+\newsavebox{\taskbox}
+\newlength{\x}
+\newsavebox{\pictbox}
+
+% условие с картинкой (картинка выравнивается по центру)
+\newcommand{\taskpic}[2]{
+	\savebox{\taskbox}{\parbox[t]{0.93\textwidth-4.3cm}{\smallskip #1 \smallskip}}
+	\savebox{\pictbox}{\parbox[t]{4cm}{\smallskip \centering
+    	\vspace{0pt} #2 \smallskip}}
+	\h=\ht\taskbox
+	\advance\h\dp\taskbox
+	\x=\ht\pictbox
+	\advance\x\dp\pictbox
+	\hrule
+	\hbox to \textwidth {%
+		\vrule\parbox[t][\maxof{\h}{\x}][t]{0.04\textwidth}{ \smallskip
+    		\centering \arabic{notask} }\vrule%
+	    \hfill\parbox[t][\maxof{\h}{\x}][t]{0.93\textwidth-4.3cm}{\smallskip #1
+    	    \smallskip}\hfill\vrule%
+	    \hfill\parbox[t][\maxof{\h}{\x}][c]{4cm}{\hfil #2 \hfil}\hfill\vrule
+	}
+	\hrule
+	\addtocounter{notask}{1}
+	\pagebreak[2]
+}
+
+\tikzset{>=latex, interface/.style = {postaction = {draw, decorate,
+	    decoration = {border, angle = 45, amplitude = 0.2cm, segment length=1.4323mm}}},%
+		spring/.style={decorate,decoration={snake,amplitude=1mm,
+        segment length=2mm},thick}}
+
+
+\begin{document}
+
+\thispagestyle{empty}
+\parindent=5mm
+\righthyphenmin=2
+\begin{center}
+
+\phantom{Бухалкин апанас}
+
+\vfill
+\LARGE{\textsc{XVII Летняя Физическая Школа}}\\
+\Large{\textsc{15 июля -- 4 августа 2011}}\\[1cm]
+\Large{\textit{Сборник материалов}}\\[2cm]
+\includegraphics[width=6cm]{logo.pdf}
+\vfill
+
+\small{\textsf{Санкт-Петербург}\\
+\textsf{2011}}
+\end{center}
+
+\clearpage
+
+\section{Участники ЛФШ.}
+\label{sec:participants}
+
+\subsection{8 и 9 класс.}
+\label{sec:8and9}
+
+\begin{table}[ht]
+  \begin{minipage}[t]{0.45\linewidth}\centering
+    \begin{center}
+      \textit{8 класс}
+    \end{center}
+    \begin{tabular}[h]{|c|c|c|c|}
+      \hline
+      \textbf{№} & \textbf{Фамилия, имя} & \textbf{Шк.} & \textbf{Д/б}\\
+      \hline
+      1 & Артамонов Николай & 239 & 47\\ \hline
+      2 & Багиров Фарид & 533 & Д1 \\ \hline
+      3 & Баринов Фёдор & 239 & Д3 \\ \hline
+      4 & Богомолов Егор &  92 & ПО \\ \hline
+      5 & Бомов Фёдор & 292 & 56 \\ \hline
+      6 & Галкин Георгий & --- & --- \\ \hline
+      7 & Гера Станислава & 534 & Д3 \\ \hline
+      8 & Грибакин Борис & 74 & 50 \\ \hline
+      9 & Громов Даниил & Ун. & 24 \\ \hline
+      10 & Гуменюк Виталий & 92 & 66 \\ \hline
+      11 & Жибарев Георгий & 533 & Д3 \\ \hline
+      12 & Йона Андрей & 152 & --- \\ \hline
+      13 & Кокурушников Тимофей & 239 & Д2 \\ \hline
+      14 & Коробов Артём & 2 & 48 \\ \hline
+      15 & Кутимский Максим & 239 & --- \\ \hline
+      16 & Лебедев Александр & --- & 14 \\ \hline
+      17 & Мастеров Роман & 366 & 58 \\ \hline
+      18 & Морозов Дмитрий & 239 & Д2 \\ \hline
+      19 & Олейник Дарья & 239 & 53 \\ \hline
+      20 & Охотников Артём & 239 & Д2 \\ \hline
+      21 & Петров Степан & 30 & Д2 \\ \hline
+      22 & Приходько Алексей & 366 & ПО \\ \hline
+      23 & Родионова Анна & 239 & 54 \\ \hline
+      24 & Рутковский Илья & 78 & 46 \\ \hline
+      25 & Сокольский Станислав & 366 & 33 \\ \hline
+      26 & Староказников Александр & 344 & ПО \\ \hline
+      27 & Трофимов Даниил & 101 & Д3 \\ \hline
+      28 & Уланова Арина & 533 & Д2 \\ \hline
+      29 & Усачёва Мария & 295 & 23 \\ \hline
+      30 & Ходунов Павел & 239 & Д1 \\ \hline
+      31 & Шубин Григорий & 550 & 42 \\ \hline
+    \end{tabular}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\linewidth}\centering
+    \begin{center}
+      \textit{9 класс}
+    \end{center}
+    \begin{tabular}[h]{|c|c|c|c|}
+      \hline
+      \textbf{№} & \textbf{Фамилия, имя} & \textbf{Шк.} & \textbf{Д/б}\\
+      \hline
+      1 & Агафонов Игорь & 533 & ПО  \\ \hline
+      2 & Андреев Константин & ФТШ & Д2  \\ \hline
+      3 & Беляков Михаил & 239 & Д1  \\ \hline
+      4 & Блехштейн Максим & 239 & Д3  \\ \hline
+      5 & Буренев Иван & ФТШ & Д3  \\ \hline
+      6 & Вахренев Роман & 239 & 44  \\ \hline
+      7 & Глезеров Евгений & 73 & ---  \\ \hline
+      8 & Гордеева Людмила & ФТШ & 16  \\ \hline
+      9 & Гуцол Ксения & ФТШ & ПО  \\ \hline
+      10 & Затылкин Павел & 239 & 47  \\ \hline
+      11 & Затылкин Кирилл & 239 & 40  \\ \hline
+      12 & Иванов Владислав & 177 & Д3  \\ \hline
+      13 & Киселев Егор & 239 & Д3  \\ \hline
+      14 & Коско Софья & 239 & Л  \\ \hline
+      15 & Кравченко Дмитрий & --- & 40  \\ \hline
+      16 & Куксенок Даниил & 533 & ПО  \\ \hline
+      17 & Лихачев Иван & 30 & 44  \\ \hline
+      18 & Луцкий Георгий & ФТШ & ПО  \\ \hline
+      19 & Малышева Александра & ФТШ & 39  \\ \hline
+      20 & Муретова Мария & 239 & Д1  \\ \hline
+      21 & Никоненко Михаил & 393 & ---  \\ \hline
+      22 & Осипов Игорь & 571 & ---  \\ \hline
+      23 & Портянкин Егор & ФТШ & 65  \\ \hline
+      24 & Семенов Александр & ФТШ & 31  \\ \hline
+      25 & Сычёв Станислав & ФТШ & Д1  \\ \hline
+      26 & Хвещук Анастасия & 470 & ---  \\ \hline
+      27 & Цейтина Елена & ФТШ & 41  \\ \hline
+    \end{tabular}
+  \end{minipage}
+\end{table}
+
+В \textbf{8 классе} работали: Н.В. Тараканов, М.В. Евтихиев (студент 3-го
+курса ФТФ СПбГПУ), А.В. Лиознова (студентка 3-го курса ФТФ СПбГПУ),
+И. Авдеев, А. Лиознов (студенты 1-го курса ФТФ СПбГПУ), Д. Максимова
+(студентка 1-го курса ФТФ СПбГПУ), С. Богданов (студент 1-го курса ФФ
+МГУ).
+
+В \textbf{9 классе} работали: О.В. Шустова (студентка 6-го курса ФТФ СПбГПУ),
+Ф. Затылкин (студент 2-го курса ФМФ СПбГПУ), А. Коротченков (студент
+2-го курса ФТФ СПбГПУ), Ф. Петухов (студент 1-го курса ФТФ СПбГПУ). 
+
+\clearpage
+
+\subsection{10 и 11 класс.}
+\label{sec:10and11}
+
+\begin{table}[ht]
+  \begin{minipage}[t]{0.45\linewidth}\centering
+    \begin{center}
+      \textit{10 класс}
+    \end{center}
+    \begin{tabular}[h]{|c|c|c|c|}
+      \hline
+      \textbf{№} & \textbf{Фамилия, имя} & \textbf{Шк.} & \textbf{Д/б}\\
+      \hline
+      1 & Бальков Андрей & 261 & 37\\ \hline
+      2 & Вишняк Сергей & ФТШ & 41 \\ \hline
+      3 & Водопьян Даниил & 239 & Р \\ \hline
+      4 & Грудкин Антон & 239 & Д1 \\ \hline
+      5 & Егоров Антон & ФТШ & Р \\ \hline
+      6 & Иващенко Дмитрий & 239 & 32 \\ \hline
+      7 & Капралов Николай & ФТШ & 46 \\ \hline
+      8 & Конаныхин Роман & ФТШ & Д1 \\ \hline
+      9 & Крюков Михаил & ФТШ & 31 \\ \hline
+      10 & Лашкевич Злата & ФТШ & 24 \\ \hline
+      11 & Люлина Анастасия & ФТШ & 27 \\ \hline
+      12 & Максакова Мария & ФТШ & 39 \\ \hline
+      13 & Мосягин Иван & 214 & 42 \\ \hline
+      14 & Погодаев Илья & 610 & ПО \\ \hline
+      15 & Рау Владислава & 239 & 46 \\ \hline
+      16 & Серов Юрий & ФТШ & Р \\ \hline
+      17 & Томп Дмитрий & ФТШ & Д3 \\ \hline
+      18 & Ярковой Алексей & 557 & 24 \\ \hline
+    \end{tabular}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.45\linewidth}\centering
+    \begin{center}
+      \textit{11 класс}
+    \end{center}
+    \begin{tabular}[h]{|c|c|c|c|}
+      \hline
+      \textbf{№} & \textbf{Фамилия, имя} & \textbf{Шк.} & \textbf{Д/б}\\
+      \hline
+      1 & Балашов Александр & 30 & ---  \\ \hline
+      2 & Борздун Наталья & 239 & ---  \\ \hline
+      3 & Грачёв Дмитрий & М & ---  \\ \hline
+      4 & Жаровов Дмитрий & 239 & ---  \\ \hline
+      5 & Косицын Александр & 239 & ---  \\ \hline
+      6 & Максимишин Дмитрий & 239 & ---  \\ \hline
+      7 & Маслов Артём & ФТШ & Р  \\ \hline
+      8 & Матюшин Георгий & ФТШ & Д1  \\ \hline
+      9 & Михайлов Кирилл & 239 & ---  \\ \hline
+      10 & Никитин Денис & 239 & Р  \\ \hline
+      11 & Свирина Анна & 239 & ---  \\ \hline
+      12 & Смирнов Иван & 214 & Д2  \\ \hline
+      13 & Терехов Антон & 239 & Р  \\ \hline
+      14 & Толстопятов Всеволод & 239 & ---  \\ \hline
+      15 & Трофимов Павел & ФТШ & ---  \\ \hline
+      16 & Чурилова Мария & ФТШ & ---  \\ \hline
+      17 & Шалымов Роман & 239 & Д3  \\ \hline
+    \end{tabular}
+  \end{minipage}
+\end{table}
+
+В \textbf{10 классе} работали: И.А. Барыгин (к.ф.--м.н., преподаватель
+ФТШ), С. Атамась, В. Коваленко (студенты 3-го курса ФТФ СПбГПУ).
+
+В \textbf{11 классе} работали: И.Е. Шендерович, Д.О. Соколов
+(аспиранты ПОМИ РАН), Д.С. Смирнов (студент 4-го курса ФТФ СПбГПУ). 
+
+\section{Ежедневные занятия.}
+\label{sec:daily}
+
+\subsection{8 класс.}
+\label{sec:daily8}
+
+\subsubsection{Теория.}
+\label{sec:th8}
+
+\textit{Преподаватель: Н.В. Тараканов.}
+
+\subsubsection{Эксперимент.}
+\label{sec:exp8}
+
+\textit{Преподаватели: А. Лиознова, Д. Максимова, И. Авдеев.}
+
+\subsection{9 класс.}
+\label{sec:daily9}
+
+\subsubsection{Теория.}
+\label{sec:th9}
+
+\textit{Преподаватель: О.В. Шустова.}
+
+\subsubsection{Эксперимент.}
+\label{sec:exp9}
+
+\textit{Преподаватели: Ф. Затылкин, Ф. Петухов.}
+
+\subsection{Смешанная группа 8--9 классов.}
+\label{sec:daily89}
+
+\subsubsection{Теория.}
+\label{sec:th89}
+
+\textit{Преподаватель: Н.В. Тараканов.}
+
+\subsubsection{Эксперимент.}
+\label{sec:exp89}
+
+\textit{Преподаватели: С. Богданов, А. Лиознов.}
+
+\subsection{10 класс.}
+\label{sec:daily10}
+
+\subsubsection{Теория.}
+\label{sec:th10}
+
+\textit{Преподаватель: С. Атамась.}
+
+\subsubsection{Эксперимент.}
+\label{sec:exp10}
+
+\textit{Преподаватель: И.А. Барыгин.}
+
+
+\subsection{11 класс.}
+\label{sec:daily11}
+
+\subsubsection{Теория.}
+\label{sec:th11}
+
+\textit{Преподаватели: И.Е. Шендерович, Д.О. Соколов.}
+
+\subsubsection{Эксперимент.}
+\label{sec:exp11}
+
+\textit{Преподаватель: Д.С. Смирнов.}\\
+
+Идеи большинства экспериментов взяты из книги С.Д. Варламова,
+А.Р. Зильбермана, В.И. Зинковского <<Экспериментальные задачи на
+уроках физики и физических олимпиадах>>.
+
+\begin{enumerate}
+\item Найти отношение массы монеты к массе листа миллиметровки.\\
+  \textit{Оборудование:} монета, миллиметровка.
+\item Найти закон распределения времени, отмеряемого внутренними
+  часами. Экспериментатор должен сто раз отмерить по внутренним часам
+  10 секунд и сравнить результат с истинным.
+\item Определить плотность и массу куска пластилина.\\
+  \textit{Оборудование:} мерный стакан, миллиметровка.
+\item Измерить расстояние между бороздками CD.\\
+  \textit{Оборудование:} лазерная указка известной длины волны,
+  линейка.
+\item Измерить и объяснить ВАХ лампочки накаливания.\\
+  \textit{Оборудование:} батарейка 9В, реостат 10КОм, провода, мультиметр. 
+\item Определить схему и номиналы элементов в чёрном ящике.\\
+  \textit{Оборудование:} мультиметр. 
+\item Определить теплоту плавления припоя.\\
+  \textit{Оборудование:} свечка, мерный стакан, термопара, вода. 
+\item Определить отношение частот всех мод двойного
+  маятника.\\
+  \textit{Оборудование:} пластилин, нитки, секундомер.
+\end{enumerate}
+
+
+\section{Материалы физических боёв.}
+\label{sec:battles}
+
+\subsection{Физбой 9 класса.}
+\label{sec:battle9}
+
+\subsection{Полуфинал.}
+\label{sec:battle9s}
+
+\subsection{Финал.}
+\label{sec:battle9f}
+
+\clearpage
+\subsection{Физбой 10 класса.}
+\label{sec:battle10}
+
+\task{С какой силой отталкиваются грани равномерно заряженного по
+  поверхности правильного тетраэдра? Длина ребра тетраэдра $a$, заряд
+  каждой грани $q$.}
+
+\taskpic{Участок цепи постоянного тока состоит из трех одинаковых
+  вольтметров и двух одинаковых амперметров. Показания вольтметров
+  V$_1$ и V$_2$ равны $U_1 = 6$~B, $U_2 = 4$~B. Как вы полагаете, что
+  показывает третий вольтметр?}{
+  \begin{tikzpicture}
+    \draw[thick] (0,0.5) -- (0.5,0.5);
+    \draw[thick] (0.5,0.5) -- (0.5,2) -- (1.45,2) (2.05,2) -- (2.5,2) --
+    (2.5,1) -- (2.7,1);
+    \draw[thick] (1.75,2) circle (0.3cm) node[blue] {$V_1$};
+    \draw[thick] (3,1) circle (0.3cm) node[blue] {$A_2$};
+    \draw[thick] (3.3,1) -- (3.5,1) -- (3.5,0.5) -- (4,0.5);
+    \draw[thick] (0.5,1) -- (0.7,1);
+    \draw[thick] (1,1) circle (0.3cm) node[blue] {$A_1$};
+    \draw[thick] (2.6,1) -- (2.3,1);
+    \draw[thick] (2,1) circle (0.3cm) node[blue] {$V_2$};
+    \draw[thick] (1.3,1) -- (1.7,1);
+    \draw[thick] (0.5,0.5) -- (0.5,0) -- (1.5,0) (2.1,0) -- (3.5,0) --
+    (3.5,1);
+    \draw[thick] (1.8,0) circle (0.3cm) node[blue] {$V_3$};
+  \end{tikzpicture}
+}
+
+\task{Ракета пришельцев стартует с поверхности Земли и практически
+  мгновенно набирает постоянную вертикальную скорость $v =
+  800$~м/с. Злодеи обстреливают ракету из пушки, которая находится в
+  $l=40$~км от стартовой площадки. Выстрел производится в момент
+  старта. Могут ли злодеи попасть в ракету? Начальная скорость снаряда
+  равна $u = 1000$~м/с. Сопротивлением воздуха пренебречь.}
+
+\task{Узкий пучок протонов налетает на шар радиуса $a$. Прицельное
+  расстояние (расстояние от центра шара до прямой, на которой лежит
+  начальная скорость протонов) $b$, начальная энергия протонов
+  $E$. Найти установившийся заряд шара. Заряд протона $e$, масса $m$.}
+
+\taskpic{Кубик массы $M$ стоит на горизонтальной поверхности. Его
+  касается кубик массы $m$, висящий на невесомой нерастяжимой
+  нити. Нить составляет угол $\alpha$ с вертикалью. В начальный момент
+  кубики неподвижны. Определите ускорения кубиков в начальный
+  момент. Трением пренебречь. Считайте, что кубики не поворачиваются
+  вокруг своей оси.}{
+  \begin{tikzpicture}
+    \draw[thick,interface] (4,0) -- (0,0);
+    \draw[thick] (1.5,0) rectangle (3.5,2) node[midway,blue] {$M$};
+    \draw[thick] (0.75,1.25) rectangle (1.5,2) node[midway,blue]
+    {$m$};
+    \draw (1.12,2) -- (2,4);
+    \draw[fill=black] (2,4) circle (0.04cm);
+    \draw[dashed] (2,4) -- (2,3);
+    \draw[blue] (2,3.25) arc (270:246:0.75);
+    \draw[blue] (1.8,3.03) node {$\alpha$};
+  \end{tikzpicture}
+}
+
+
+\task{На достаточно удаленные предметы смотрят через собирающую линзу
+  с фокусным расстоянием $F=9$~см, располагая глаз на расстоянии
+  $a=36$~см от линзы. Оцените минимальный размер экрана, который нужно
+  расположить за линзой так, чтобы он перекрыл все поле
+  изображения. Считайте, что радиус зрачка равен $r=1{,}5$~мм.}
+
+
+\clearpage
+\subsection{Физбой 11 класса.}
+\label{sec:battle11}
+
+\setcounter{notask}{1}
+\taskpic{ Два одинаковых кубика с ребром $H$ и массой $2.5m$ каждый стоят
+  почти соприкасаясь гранями на гладкой горизонтальной
+  поверхности. Сверху на них аккуратно кладут шар массы $m$ и радиуса
+  $R$, и он начинает смещаться вертикально вниз, раздвигая кубики в
+  стороны. Найти скорость шара непосредственно перед ударом о
+  горизонтальную поверхность. Начальная скорость шара пренебрежимо
+  мала.  }{
+  \begin{tikzpicture}
+    \draw[very thick,interface] (4,0) -- (0,0);
+    \draw[very thick] (0.5,0) rectangle (1.5,1);
+    \draw[very thick] (2.5,0) rectangle (3.5,1);
+    \draw[very thick] (2,1.5) circle (0.7cm);
+    \draw[blue,<->] (0.75,0) -- (0.75,1) node[midway,right] {$H$};
+    \draw[blue,->] (2,1.5) node[above=0.1cm] {$R$} -- ++(40:0.7cm) ; 
+  \end{tikzpicture}
+}
+
+
+\taskpic{ За линзой на расстоянии $\ell = 4$ см (больше фокусного)
+  расположено перпендикулярно главной оптической оси плоское
+  зеркало. Перед линзой, также перпендикулярно главной оптической оси,
+  расположен лист клетчатой бумаги. На этом листе получают изображение
+  его клеток при двух положениях листа относительно линзы. Эти
+  положения отличаются на $L = 9$ см. Определить фокусное расстояние
+  линзы.  }{
+  \begin{tikzpicture}
+    \draw[very thick] (0,0) -- (3.5,0);
+    \draw[very thick] (1,1.1) -- (1,-1.1);
+    \draw[very thick,<->] (2.5,1.1) -- (2.5,-1.1);
+    \draw[very thick,interface] (3.5,1.1) -- (3.5,-1.1);
+    \draw[blue,<->] (2.5,-1.2) -- (3.5,-1.2) node[midway,below] {$\ell$};
+  \end{tikzpicture}
+}
+
+\task{ Вагон массой $M$ и длиной $L$ может без трения двигаться по
+  рельсам. Он заполнен газом и разделен пополам подвижной невесомой
+  вертикальной перегородкой. Вначале температура газа равна $T$. В
+  правой половине включают нагреватель и доводят температуру газа до
+  $2T$, в левой части температура остается прежней. Найти перемещение
+  вагона, если масса всего газа равна $m$.  }
+
+\task{ Звезда массы $M$ и радиуса $r$ образовалась из однородного
+  облака газа с молярной массой $\mu$ радиуса $R$, исходно имевшего
+  температуру $T$. Считая звезду также однородной, определите
+  среднеквадратичное значение ее угловой скорости.  }
+
+\task{ Радиусы кривизны двух одинаковых, слипшихся друг с другом,
+  мыльных пузырей равны $R$. После того, как перегородка лопнула,
+  образовался один пузырь радиусом $R_1$. Коэффициент поверхностного
+  натяжения мыльного раствора $\sigma$. Найти атмосферное давление.  }
+
+\taskpic{ Имеется равномерно заряженная диэлектрическая
+  сфера. Известно, что, если ее разрезать пополам, то <<половинки>>
+  будут расталкиваться с силой $F_1$. Если разрезать пополам одну из
+  половинок (вдали от второй), то получившиеся <<четвертинки>> будут
+  расталкиваться с силой $F_2$. И, наконец, если разрезать пополам
+  одну из <<четвертинок>> (вдали от оставшихся частей сферы) на
+  <<восьмушки>>, то они будут расталкиваться с силой $F_3$. Найти
+  силу, с которой будут расталкиваться <<восьмушки>>, если их
+  поместить так, как показано на рисунке.  }{\begin{tikzpicture}
+
+    \def\size{50pt}
+
+
+    \draw [white,fill = gray]
+		(0,0) -- (\size, 0) arc (0:90:\size) -- cycle;
+    \draw [white,fill = gray]
+		(0,0) -- (-\size, 0) arc (180:270:\size) -- cycle;
+
+    \fill [fill = white] (0, \size) arc (90:270:\size / 5 and \size);
+    \fill [fill = white, dashed]
+    	(0, -\size) arc (-90:90:\size / 5 and \size);
+    \draw [fill = white, dashed,thick]
+    	(\size, 0) arc (0:180:50pt and \size / 5);
+    \draw [fill = white,thick] (-\size, 0) arc (180:360:50pt and \size / 5);
+	\draw [thick] (0, \size) arc (90:270:\size / 5 and \size);
+    \draw [dashed,thick] (0, -\size) arc
+    	(-90:90:\size / 5 and \size);
+    \draw[thick] (0, 0) circle (\size);
+\end{tikzpicture}}
+
+
+
+
+\end{document}
