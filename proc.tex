@@ -115,7 +115,9 @@
 \tikzset{>=latex, interface/.style = {postaction = {draw, decorate,
 	    decoration = {border, angle = 45, amplitude = 0.2cm, segment length=1.4323mm}}},%
 		spring/.style={decorate,decoration={snake,amplitude=1mm,
-        segment length=2mm},thick}}
+                    segment length=2mm},thick},
+                marrow/.style={postaction={draw,decorate,decoration={markings,
+    mark=at position 0.6 with {\arrow{latex}}}}}}
 
 
 \begin{document}
@@ -873,7 +875,124 @@
     \draw[thick] (0, 0) circle (\size);
 \end{tikzpicture}}
 
+\clearpage
+\section{Заключительные контрольные.}
+\label{sec:final}
+
+\subsection{10 класс.}
+\label{sec:final10}
+
+\setcounter{notask}{1}
+
+\task{Четыре одноименных точечных заряда величиной $q$ были
+  расположены вдоль одной прямой на расстоянии $r$ друг от
+  друга. Какую работу надо совершить, чтобы поместить их в вершинах
+  тетраэдра с длиной ребра $r$?}
+
+\task{Металлический шар радиуса 10~см помещен внутрь сферической
+  металлической оболочки, имеющей внешний радиус 30~см и толщину
+  10~см, так, что их центры совпадают. На шаре находится заряд
+  $10^{-5}$~Кл, на оболочке --- заряд $8\cdot10^{-5}$~Кл. Постройте
+  графики зависимости напряженности и потенциала электрического поля
+  от расстояния до центра шара.}  \taskpic{Пространство между
+  обкладками плоского конденсатора заполнено двумя слоями разных
+  диэлектриков толщины $d_1$ и $d_2$. Диэлектрическая проницаемость
+  диэлектриков $\epsilon_1$ и $\epsilon_2$. Площадь обкладок
+  $S$. Найдите емкость конденсатора. Какой заряд будет индуцироваться
+  на границе раздела диэлектриков, если на пластинах конденсатора
+  разместить заряд $\pm q$?}  {
+  \begin{tikzpicture}
+    \draw[pattern=north east lines] (0,0) rectangle (3,1);
+    \draw[pattern=north west lines] (0,1) rectangle (3,1.5);
+    \draw[thick] (0,0) -- (3,0);
+    \draw[thick] (0,1.5) -- (3,1.5);
+    \draw[thick] (1.5,-0.5) -- (1.5,0);
+    \draw[thick] (1.5,1.5) -- (1.5,2);
+    \node[anchor=west] at (3,1.25) {$\epsilon_1$};
+    \node[anchor=west] at (3,0.5) {$\epsilon_2$};
+  \end{tikzpicture}
+}  
+
+\taskpic{Найдите количество теплоты, выделившееся на каждом
+  сопротивлении после замыкания ключа. Один конденсатор ($C_1$)
+  вначале был заряжен до напряжения $V$, а второй не был заряжен.}
+{\vspace{0.01mm} \ctikzset {bipoles/length=0.8cm}
+  \begin{circuitikz}
+    \draw (0,0) 
+    to [closing switch] (1,0) 
+    to [generic=$R_2$] (3,0) 
+    to [C=$C_2$] (3,1.5) 
+    to [generic=$R_1$] (0,1.5) 
+    to [C=$C_1$] (0,0);
+  \end{circuitikz}
+}
+
+\taskpic{Пластины плоского конденсатора имеют форму правильного шестиугольника и расположены на расстоянии $d$ друг от друга. Найти напряженность поля в точке $A$, расположенной посередине между одной из вершин шестиугольника и соответствующей вершиной другого шестиугольника. Заряд пластин $q$.}
+{
+\begin{tikzpicture}
+\draw[thick] (0,0) -- (3,0);
+\draw[thick] (0,0.5) -- (3,0.5);
+\draw[fill=black] (3,0.25) circle (0.02) node[right] {$A$};
+\end{tikzpicture}
+}
+\vspace{0.2cm}
+\subsection{11 класс.}
+\label{sec:final11}
+
+\setcounter{notask}{1}
+
+\taskpic{Две металлические пластины образуют двугранный угол
+  $\pi/4$. На биссектрисе этого угла на расстоянии $h$ от пластин
+  находится бесконечный заряженный провод с плотностью заряда
+  $\lambda$. Найти силу, с которой провод притягивается к двугранному
+  углу.}{
+  \begin{tikzpicture}
+    \draw[very thick] (2.5,2.5) -- (0,0) -- (3,0);
+    \draw[dashed,thick] (0,0) -- (22.5:3cm);
+    \draw[thick,blue] (0.8,0) arc (0:45:0.8cm);
+    \draw[thick,blue,->] (0.4,1.5) node[left] {$\frac{\pi}{4}$}
+    to[out=0,in=30] (0.8,0.5);
+    \draw[blue,<->] (22.5:2cm) -- +(-90:.75cm)
+    node[midway,right] {$h$};
+    \draw[very thick] (0,0) ++ (22.5:2cm) circle (0.1cm);
+    \draw[very thick,fill=black] (0,0) ++ (22.5:2cm) circle (0.03cm);
+  \end{tikzpicture}}
 
 
+\taskpic{Длинный прямой провод с током $I$ имеет участок в виде
+  полуокружности радиуса $R$. Определите индукцию магнитного поля в
+  центре полуокружности.}{
+  \begin{tikzpicture}
+    \draw[thick] (0,0) -- (1,0) (3,0) -- (4,0);
+    \draw[thick,marrow] (1,0) arc (180:0:1cm);
+    \draw[blue,thick,->] (2,0) -- ++(30:1cm) node[midway,above] {$R$};
+  \end{tikzpicture}}
+
+\taskpic{Виток площади $S$ расположен перпендикулярно магнитному полю
+  индукции $B$. Он замкнут через гальванометр с сопротивлением
+  $R$. Какой заряд протечёт через гальванометр, если виток повернуть
+  параллельно полю?}{
+  \begin{tikzpicture}
+    \draw[thick] (0,0) ellipse (1.5cm and 0.75cm);
+    \draw[thick,dashed] (0,0) ellipse (0.5cm and 1.5cm);
+    \draw[thick,->,blue] (0,0) -- ++(0,1cm) node[midway,right] {$\vec{B}$}; 
+  \end{tikzpicture}}
+
+\taskpic{Плоский конденсатор помещён в однородное магнитное поле индукции
+$B$, параллельное пластинам. Из точки $A$ вылетают электроны в
+направлении, перпендикулярном магнитному полю. Напряжение, приложенное
+к пластинам, равно $V$. При каком условии электроны будут проходить
+через конденсатор?}{
+\begin{tikzpicture}
+  \draw[line width=0.1cm] (0,1.5) -- (3,1.5);
+  \draw[line width=0.1cm] (0,0) -- (3,0);
+  \draw[blue,<->] (2.7,0) -- (2.7,1.5) node[midway,right] {$h$};
+  \draw[blue,thick,->] (0,0.75) node[above] {$A$} -- (0.5,0.75) node[right] {$v$};
+  \draw[blue,<->] (-0.1,0) -- (-0.1,0.75) node[midway,left]
+  {$\frac{h}{2}$};
+  \draw[thick,blue] (1.8,1) circle (0.1cm) node[right] {$B$};
+  \draw[blue,fill=blue] (1.8,1) circle (0.03cm);
+  \draw[black,fill=black] (0,0.75) circle (0.04cm);
+\end{tikzpicture}}
 
 \end{document}
